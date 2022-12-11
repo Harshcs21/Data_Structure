@@ -11,23 +11,26 @@ void insert(int *r ,int item, int qu[])
     }
     else
     {
-        *r++;
-        qu[*r++] = item;
+        (*r)++;
+        qu[(*r)++] = item;
     }
 }
 
-int delete(int *r, int *f ,int qu[])
+void delete(int *r, int *f ,int qu[])
 {
     //int item_deleted ;
    
-    if(*f > *r)
+    if(*f >= *r)
     {
         printf("queue is underflow\n");
     }
     else
     {
         //item_deleted = qu[*f++];
-        return  qu[*f++];
+        // return  qu[(*f)++/
+        
+        printf("the deleted value is %d\n",qu[*f]);
+        (*f)++;
     }
 }
 
@@ -66,8 +69,8 @@ int main()
                     insert(&r , item, qu);
                     break;
                    
-            case 2 : del_value = delete(&r, &f, qu);
-                    printf("deleted value is : %d \n", del_value);
+            case 2 : delete(&r, &f, qu);
+                   // printf("deleted value is : %d \n", del_value);
                     break ;
                    
             case 3 : display(&r , &f, qu);
