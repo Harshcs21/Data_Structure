@@ -12,7 +12,7 @@ void insert(int *r ,int item, int qu[])
     else
     {
         (*r)++;
-        qu[(*r)++] = item;
+        qu[(*r)] = item;
     }
 }
 
@@ -20,7 +20,7 @@ void delete(int *r, int *f ,int qu[])
 {
     //int item_deleted ;
    
-    if(*f >= *r)
+    if(*f > *r)
     {
         printf("queue is underflow\n");
     }
