@@ -1,0 +1,218 @@
+#include <stdio.h>
+#include<math.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct node {
+   
+    int value;
+    struct node *next;
+};
+
+typedef struct node *node;
+// typedef NUll null;
+
+node getnode()
+{
+    node new;
+   
+    new = (node)malloc(sizeof(struct node));
+   
+    if(new == NULL)
+    {
+        printf("memory not allocated\n");
+    }
+   
+    return new;
+}
+
+node insert_at_beg(int item, node first)
+{
+    node temp;
+   
+    temp = getnode();
+   
+    temp->value = item;
+    temp->next = NULL;
+   
+    if(first == NULL)
+    {
+        return temp;
+    }
+   
+    else
+    {
+        temp->next = first;
+        first = temp;
+        return first;
+    }
+   
+}
+
+
+node insert_at_end(int item, node first)
+{
+    node temp,last;
+   
+    temp = getnode();
+   
+    temp->value = item;
+    temp->next = NULL;
+   
+    if(first == NULL)
+    {
+        return temp;;
+    }
+   
+    if(first->next == NULL)
+    {
+        first->next = temp;
+        return first;
+    }
+    else
+    {
+        last = first;
+       
+        while(last->next != NULL)
+        {
+            last = last->next;
+        }
+       
+        last->next = temp;
+       
+        return first;
+    }
+}
+
+
+node insert_at_any_position(int item ,node first,int position)
+{
+    int count = 1;
+    node temp,prev,curr;
+   
+    temp = getnode();  
+   
+    temp->value = item;
+    temp->next  = NULL;
+   
+    if(first == NULL && position == 1)
+    {
+        return temp;
+    }
+   
+    if(first != NULL && position == 1)
+    {
+        insert_at_beg(item, first);
+    }
+   
+    prev = NULL;
+    curr = first;
+   
+    while(count != position && curr != NULL)
+    {
+        prev = curr;
+        curr = curr->next;
+        count++;
+    }
+   
+    if(count == position)
+    {
+        prev->next = temp;
+        temp->next = curr;
+        return first ;
+       
+    }
+   
+    /*if(curr == NULL)
+    {
+        printf("Position not found in list\n");
+        return  first;
+    }*/
+   
+
+}
+
+void display(node first)
+{
+    if(first == NULL)
+    {
+        printf("list is empty\n");
+    }
+    else
+    {
+        while(first != NULL)
+        {
+            printf("%d\n",first->value);
+            first = first->next;
+        }
+    }
+}
+
+node delete_at_beg(node first)
+{
+    node temp;
+
+    if( first == NULL)
+    {
+        printf("linked list is empty\n");
+        return NULL;
+    }
+    
+    
+        temp = first;
+        temp = temp->next ;
+        printf("the deleted element is %d",first->value);
+
+        free(first);
+        return temp;
+    
+}
+
+int main()
+{
+    int item,n;
+    int c,p ;
+   
+    node first = NULL;
+   
+    while(1)
+    {
+        printf("choose the following : \n 1.Insert at the beg\n 2. Insert at the end\n 3. Insert at any position\n 4. exit \n 5. Display\n 6. Delete_at_beg\n");
+        scanf("%d",&n);
+       
+        switch(n)
+        {
+            case 1 : printf("insert element \n");
+                    int a ;
+                    scanf("%d",&a);
+                    first = insert_at_beg(a, first);
+                    break;
+                   
+            case 2 :  printf("insert element \n");
+                    int b ;
+                    scanf("%d",&b);
+                    first = insert_at_end(b, first);
+                    break;
+           
+            case 3 :   printf("insert element and its position\n");
+                    
+                    scanf("%d",&p);
+                    scanf("%d",&c);
+                    first = insert_at_any_position(c, first,p);
+                    break;
+           
+            case 5 : display(first);  
+                    break;
+           
+            case 4 : exit(0);
+
+            /*case 6 : delete_at_beg(first);
+                    break;*/
+           
+            default : printf("enter valid number\n");
+                                     
+        }
+       
+    }
+     
+}
