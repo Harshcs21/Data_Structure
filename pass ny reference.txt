@@ -1,59 +1,89 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define Stack_size 10
-void push(int st[],int*top,int item)
-{
-	if(*top==Stack_size - 1)
-		printf("Stack Overflow \n");
-	else
-	{
-		(*top)++;
-		st[*top] = item;
-	}
-}
 
-int pop(int st[],int*top)
-{
-	int item_deleted;
-		if(*top==-1)
-			printf("Stack Underflow \n");
-		else
-		{
-			item_deleted = st[*top];
-			(*top)--;
-			return item_deleted;
-		}
-}
+// #define q_size 2
 
-void display(int st[],int*top)
+void push(int item,int a[],int *top,int q_size)
 {
-	int i;
-	if(*top == -1)
-		printf("Stack is empty\n");
-    for(i=0; i <=*top;i++)
-        printf("%d \n", st[i]);
-}
-
-void main()
-{   int st[Stack_size ];
-    int item,top=-1,ch,value_deleted;
-    while(1)
+    if(*top == q_size - 1)
     {
-        printf("choose one of the option given below \n 1. inset element \n 2. delete element \n 3. display elements \n 4. Exit\n ");
-        scanf("%d",&ch);
-        switch(ch)
+        printf("stack is overflow \n");
+    }
+    else
+    {
+        (*top)++;
+        a[*top] = item;
+    }
+}
+
+void pop(int a[] ,int *top,int q_size)
+{
+    if((*top) == -1)
+    {
+        printf("stack is underflow\n");
+    }
+    else
+    {
+        printf("deleted element is %d\n", a[*top]);
+        (*top)--;
+    }
+}
+
+void display(int a[],int* top,int q_size)
+{
+    if((*top) == -1)
+    {
+        printf("stack is empty\n");
+    }
+    else
+    {
+        printf("Elements of stacks are : \n");
+        for(int i=*top ;i>=0 ;i--)
         {
-            case 1: printf("Enter the element you want to add\n");
-                    scanf("%d",&item);
-                    push(st,&top,item);
-                    break;
-            case 2: value_deleted=pop(st,&top);
-                    printf("item_deleted=%d\n",value_deleted);
-                    break;
-            case 3: display(st,&top);
-                    break;
-            default:exit(0);
-                    
+            
+            printf("%d\n",a[i]);
         }
     }
+    
+}
+    
+    
+int main()
+{
+    printf("enetr th size of stack :\n");
+    int q_size;
+    scanf("%d",&q_size);
+    
+    int top = -1;
+    int a[q_size];
+    int n;
+    
+    while(1)
+    {
+        int t;
+        
+        printf("\nchoose the following : \n 1. push \n 2. pop \n 3. display \n 4. exit \n");
+        scanf("%d",&n);
+        
+        switch(n)
+        {
+            case 1 : printf("enter the elment to enter : \n");
+                     scanf("%d",&t);
+                     push(t,a,&top,q_size);
+                     break;
+        
+            case 2 : pop(a , &top,q_size);
+                    break;
+            
+            case 3 : display (a, &top,q_size);  
+                    break;
+                    
+            case 4 : exit(0);
+            
+            default : printf("enter valid number\n");
+        }
+        
+    }
+    
+
 }
